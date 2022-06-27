@@ -1,0 +1,9 @@
+package com.player.repository;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.player.entity.Player;
+
+public interface PlayerRepository extends CrudRepository<Player, Long>{
+
+}

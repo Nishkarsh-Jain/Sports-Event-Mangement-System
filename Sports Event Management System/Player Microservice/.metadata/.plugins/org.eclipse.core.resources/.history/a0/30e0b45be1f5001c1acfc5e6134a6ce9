@@ -1,0 +1,23 @@
+package com.player;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.player.entity.Player;
+
+@SpringBootApplication
+public class PlayerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PlayerApplication.class, args);
+	}
+
+
+	@Bean
+	public Player player() {
+		return new Player();
+
+	}
+
+}

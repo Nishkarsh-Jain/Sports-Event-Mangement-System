@@ -1,0 +1,25 @@
+package com.player.service;
+
+import com.player.controller.List;
+import com.player.controller.Player;
+import com.player.controller.o;
+
+public class PlayerService {
+
+/*	o	POST:/addPlayer (Input: Player object | Output: Player  +” added successfully”)
+	o	DELETE:/deletePlayer (Input: player id which is already exists | Output: Player Object +” removed successfully”)
+	o	GET:/players(Input: None| Output: ListAllPlayers)
+*/
+	
+	public String addPlayer() {
+
+	}
+	
+	public String deletePlayer() {
+
+	}
+
+	public List<Player> listAllPlayers() {
+
+	}
+}
