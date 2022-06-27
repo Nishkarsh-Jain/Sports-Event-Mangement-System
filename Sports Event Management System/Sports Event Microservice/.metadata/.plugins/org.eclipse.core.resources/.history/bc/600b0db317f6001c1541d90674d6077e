@@ -1,5 +1,0 @@
-package com.sports.event.repository;
-
-public interface SportsRepository {
-
-}
