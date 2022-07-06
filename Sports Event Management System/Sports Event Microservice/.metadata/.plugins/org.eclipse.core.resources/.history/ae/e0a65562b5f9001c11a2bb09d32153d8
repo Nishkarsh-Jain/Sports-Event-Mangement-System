@@ -1,0 +1,5 @@
+package com.sports.event.config;
+
+public class SwaggerConfig {
+
+}

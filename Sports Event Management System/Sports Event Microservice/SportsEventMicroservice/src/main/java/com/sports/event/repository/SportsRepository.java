@@ -1,12 +1,16 @@
 package com.sports.event.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import com.sports.event.entities.Sports;
 
-import com.sports.event.entity.Sports;
+/*
+ *  SportsRepository to perform CRUD operations
+ *  */
 
 @Repository
-public interface SportsRepository extends JpaRepository<Sports, Long> {
+public interface SportsRepository extends CrudRepository<Sports, Long> {
 
-	 Sports findBySportsName(String sportName);
+	Sports findBySportsName(String sportName);
+
 }

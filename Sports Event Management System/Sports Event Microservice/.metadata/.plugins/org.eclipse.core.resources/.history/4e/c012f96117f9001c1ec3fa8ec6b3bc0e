@@ -1,0 +1,40 @@
+package com.sports.event;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.sports.event.entity.Events;
+import com.sports.event.entity.Sports;
+import com.sports.event.service.SportsEventService;
+import com.sports.event.service.SportsEventServiceImpl;
+
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+
+@SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "SportsEvent API", version = "2.7.1", description = "SportsEventMicroservice"))
+public class SportsEventMicroserviceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SportsEventMicroserviceApplication.class, args);
+	}
+
+	@Bean
+	public Sports sports() {
+		return new Sports();
+
+	}
+
+	@Bean
+	public Events events() {
+		return new Events();
+
+	}
+
+	@Bean
+	SportsEventServiceImpl sportsEventServiceImpl() {
+		return new SportsEventServiceImpl();
+	}
+
+}

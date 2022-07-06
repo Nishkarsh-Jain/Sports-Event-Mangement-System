@@ -1,0 +1,26 @@
+package com.sports.event.service;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
+import com.sports.event.entity.Events;
+import com.sports.event.entity.Sports;
+
+public interface SportsEventService {
+
+	public boolean addSport(Sports sport);
+
+	public List<Sports> listAllSportsDetails();
+
+	public Sports getSportsByName(String sportName);
+
+	public boolean addEvent(Events event);
+
+	public boolean deleteEvent(Long eventId);
+
+	public List<Events> events();
+
+	public Events eventsByName(String eventName);
+
+}

@@ -1,0 +1,49 @@
+package com.sports.event;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import com.sports.event.entity.Events;
+import com.sports.event.entity.Sports;
+
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+
+@EnableWebMvc 
+@SpringBootApplication
+@EnableSwagger2
+public class SportsEventMicroserviceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SportsEventMicroserviceApplication.class, args);
+	}
+
+	@Bean
+	public Sports sports() {
+		return new Sports();
+
+	}
+
+	@Bean
+	public Events events() {
+		return new Events();
+
+	}
+	
+	/**
+	 * Swagger Configuration class
+	 * 
+	 * @return Docket
+	 */
+	@Bean
+	public Docket configureSwagger2() {
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.sports.event.controller")).paths(PathSelectors.regex("/sem.*")).build();
+	}
+
+
+}

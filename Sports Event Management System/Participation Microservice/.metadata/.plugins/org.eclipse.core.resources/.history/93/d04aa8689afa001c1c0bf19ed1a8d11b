@@ -1,0 +1,70 @@
+package com.participation.controller;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.participation.entity.Participation;
+import com.participation.service.ParticipationServiceImpl;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+/*
+ * Controller for Participation
+ * 
+ * @author (POD-4)
+ * */
+
+@RestController
+@RequestMapping("/pm")
+public class ParticipationController {
+
+	@Autowired
+	private ParticipationServiceImpl ps;
+
+	@Operation(summary = "To add new Player")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Player added Successfully", content = {
+					@Content(mediaType = "application/json"), }),
+			@ApiResponse(responseCode = "201", description = "Request has succeeded and a new player has been created", content = {
+					@Content(mediaType = "application/json") }),
+			@ApiResponse(responseCode = "401", description = "Request requires user authentication info", content = {
+					@Content(mediaType = "application/json") }) })
+	@PostMapping("/addParticipation")
+	public String addParticipation(@RequestBody Participation part) {
+		return ps.addParticipation(part);
+	}
+
+	@GetMapping("/participations")
+	public List<Participation> listAllParticipation() {
+		return ps.listAllParticipation();
+	}
+
+	/*
+	 * @PutMapping("/updateStatus/{partId}") public String
+	 * updateStatus(Participation participation, @PathVariable("partId") Long
+	 * partId) { return ps.updateStatus(participation,partId); }
+	 */
+	@GetMapping("/approvedParticipations")
+	public List<Participation> listApprovedParticipations() {
+		return ps.listApprovedParticipations();
+	}
+
+	@GetMapping("/declinedParticipations")
+	public List<Participation> listDeclinedParticipations() {
+		return ps.listDeclinedParticipations();
+	}
+
+	@GetMapping("/pendingParticipations")
+	public List<Participation> listPendingParticipations() {
+		return ps.listPendingParticipations();
+	}
+
+}

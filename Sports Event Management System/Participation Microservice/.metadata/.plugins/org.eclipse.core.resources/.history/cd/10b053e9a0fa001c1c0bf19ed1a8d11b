@@ -1,0 +1,69 @@
+package com.participation.service;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.participation.entity.Participation;
+import com.participation.exception.ParticipationAlreadyAppliedException;
+import com.participation.repository.ParticipationRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
+/*
+ * Service for Participation
+ * */
+
+@Service
+@Slf4j
+public class ParticipationServiceImpl implements ParticipationService {
+
+	@Autowired
+	private ParticipationRepository ParticipationRepository;
+
+	@Autowired
+	private Participation participation;
+
+	public boolean addParticipation(Participation part) {
+		boolean status= ParticipationRepository.existsById(part.getParticipationId()); 
+		if (!status) {
+			log.info("Request for Participation get added.");
+			ParticipationRepository.save(part);
+			return true;
+		} else {
+			log.info("Participation Request is already applied.");
+			return ParticipationAlreadyAppliedException("hasaj");
+		}	
+		}
+	
+
+	public List<Participation> listAllParticipation() {
+		List<Participation> pList = (List<Participation>) ParticipationRepository.findAll();
+		log.info("To list all Participations");
+		return pList;
+	}
+
+	/*
+	 * public String updateStatus(Participation part, Long partId) { Boolean status
+	 * = false; if (partId == participation.getParticipationId()) {
+	 * ParticipationRepository.save(part); status = true; } String result =
+	 * "Declined"; if (status) { result = "Approved"; } return result; }
+	 */
+	public List<Participation> listApprovedParticipations() {
+		List<Participation> aList = ParticipationRepository.findByStatus("Approved");
+		log.info("To list all Approved Participations");
+		return aList;
+	}
+
+	public List<Participation> listDeclinedParticipations() {
+		List<Participation> dList = ParticipationRepository.findByStatus("Declined");
+		log.info("To list all Decline Participations");
+		return dList;
+	}
+
+	public List<Participation> listPendingParticipations() {
+		List<Participation> pList = ParticipationRepository.findByStatus("Pending");
+		log.info("To list all Pending Participations");
+		return pList;
+	}
+
+}

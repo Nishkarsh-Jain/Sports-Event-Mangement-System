@@ -1,0 +1,21 @@
+package com.participation.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.participation.entity.Participation;
+
+@Service
+public interface ParticipationService {
+
+	public String addParticipation(Participation part);
+
+	public List<Participation> listAllParticipation();
+
+	public List<Participation> listApprovedParticipations();
+
+	public List<Participation> listDeclinedParticipations();
+
+	public List<Participation> listPendingParticipations();
+}

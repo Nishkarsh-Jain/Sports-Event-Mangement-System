@@ -1,0 +1,5 @@
+package com.sports.event.exception;
+
+public class EventAlreadyExistException extends Exception {
+
+}

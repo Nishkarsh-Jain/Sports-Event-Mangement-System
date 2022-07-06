@@ -1,0 +1,38 @@
+package com.sports.event.entities;
+
+/*
+ * Sports Entity 
+ * */
+
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Sports {
+
+	@Id
+	@Column(name = "sports_id")
+	private Long sportId;
+	private int noOfPlayers;
+	private String sportsName;
+	private String sportsType;
+	@ManyToOne
+	private Events event;
+
+//	@OneToMany(mappedBy = "sport")
+//	private List<Events> event;
+
+	
+}

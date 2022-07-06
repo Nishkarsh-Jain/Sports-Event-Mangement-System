@@ -1,0 +1,71 @@
+package com.sports.event.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.sports.event.entity.Sports;
+import com.sports.event.entity.Events;
+import com.sports.event.repository.EventsRepository;
+import com.sports.event.repository.SportsRepository;
+
+@Service
+public class SportsEventService {
+
+	@Autowired
+	private SportsRepository sr;
+
+	@Autowired
+	private EventsRepository er;
+
+
+	public String addSport(Sports sport) {
+		Sports sports=null;
+		try {
+			sports = this.sr.save(sport);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String result = sports + " added successfully";
+		return result;
+	}
+
+	public List<Sports> listAllSportsDetails() {
+		List<Sports> sList = (List<Sports>) this.sr.findAll();
+		return sList;
+	}
+
+	public Sports getSportsByName(String sportName) {
+		Sports sports=null;
+		try {
+			sports = this.sr.findBySportsName(sportName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sports;
+	}
+
+	public String addEvent(Events event) {
+		Events events = this.er.save(event);
+		String result = events + " added successfully";
+		return result;
+	}
+
+	public String deleteEvent(Long eventId) {
+		String result = er.findById(eventId) + " deleted successfully";
+		er.deleteById(eventId);
+		return result;
+
+	}
+
+	public List<Events> events() {
+		List<Events> eList = (List<Events>) this.er.findAll();
+		return eList;
+	}
+
+	public Events eventsByName(String eventName) {
+		Events events = er.findByEventName(eventName);
+		return events;
+	}
+
+}

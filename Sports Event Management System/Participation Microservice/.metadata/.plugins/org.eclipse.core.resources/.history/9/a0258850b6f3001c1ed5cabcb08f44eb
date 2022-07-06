@@ -1,5 +1,0 @@
-package com.participation.dao;
-
-public interface ParticipantsRepo {
-
-}

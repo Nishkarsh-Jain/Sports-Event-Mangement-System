@@ -1,0 +1,5 @@
+package com.participation.swagger;
+
+public class SwaggerConfiguration {
+
+}

@@ -1,0 +1,10 @@
+package com.participation.exception;
+
+import com.participation.service.ParticipationAlreadyAppliedException;
+
+public class ParticipationAlreadyAppliedExcepetion extends Runtime {
+
+	ParticipationAlreadyAppliedException(String message){
+		super(message);
+	}
+}

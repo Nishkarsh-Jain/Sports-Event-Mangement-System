@@ -1,0 +1,103 @@
+package com.sports.event.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import com.sports.event.entity.Sports;
+import com.sports.event.exception.EventAlreadyExistException;
+import com.sports.event.exception.EventNotFoundException;
+import com.sports.event.exception.SportAlreadyExistException;
+import com.sports.event.exception.SportsNotFoundException;
+import com.sports.event.entity.Events;
+import com.sports.event.repository.EventsRepository;
+import com.sports.event.repository.SportsRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class SportsEventServiceImpl {
+
+	@Autowired
+	private SportsRepository sr;
+	@Autowired
+	private EventsRepository er;
+
+	// Completed
+	public boolean addSport(Sports sport) {
+		boolean status = sr.existsById(sport.getSportId());
+		if (!status) {
+			log.info("Sport details saved.");
+			sr.save(sport);
+			return true;
+		} else {
+			log.info("Sport details already exists.");
+			throw new SportAlreadyExistException("Sport already exists with sportId: " + sport.getSportId());
+		}
+
+	}
+
+	// completed
+	public List<Sports> listAllSportsDetails() {
+		List<Sports> sList = (List<Sports>) this.sr.findAll();
+		if (sList.size() <= 0) {
+			throw new SportsNotFoundException("No Sport is available.");
+		} else {
+			return sList;
+		}
+
+	}
+
+	// complete
+	public Sports getSportsByName(String sportName) {
+		return sr.findBySportsName(sportName);
+
+	}
+
+	// completed
+	public boolean addEvent(Events event) {
+		boolean status = sr.existsById(event.getEventId());
+		if (!status) {
+			log.info("Event details saved.");
+			er.save(event);
+			return true;
+		} else {
+			log.info("Event details already exits.");
+			throw new EventAlreadyExistException("Event already exists with sportId: " + event.getEventId());
+		}
+	}
+
+	// complete
+	public boolean deleteEvent(Long eventId) {
+		boolean status = sr.existsById(eventId);
+		if (status) {
+			log.info("Event details saved.");
+			er.deleteById(eventId);
+			return true;
+		} else {
+			log.info("Event details already exits.");
+			throw new EventNotFoundException("Event does not exists with eventtId: " + eventId);
+		}
+	}
+
+//complete
+	public List<Events> events() {
+		List<Events> eList = (List<Events>) this.er.findAll();
+		if (eList.size() <= 0) {
+			throw new SportsNotFoundException("No Event is available.");
+		} else {
+			return eList;
+		}
+
+	}
+
+	public Events eventsByName(String eventName) {
+		Events events = er.findByEventName(eventName);
+		return events;
+	}
+
+}

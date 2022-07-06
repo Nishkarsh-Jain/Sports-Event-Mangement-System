@@ -1,0 +1,49 @@
+package com.sports.event.entities;
+
+/*
+ * Sports Entity 
+ * */
+
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Sports {
+
+	@Id
+	@Column(name = "sports_id")
+	private Long sportId;
+	private int noOfPlayers;
+	private String sportsName;
+	private String sportsType;
+
+	/*
+	 * @OneToOne(cascade=Cascade.All) This will create an Events Foreign key
+	 * i.e.(Event_eventId) in Sports table.
+	 * 
+	 * @JoinColumn(name= "FK_event") This will give a custome Foreign Key Name.
+	 */
+
+	@OneToMany(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "fk_sports_id", referencedColumnName = "sports_id")
+	// @OneToMany(mappedBy = "sports", cascade = CascadeType.ALL)
+	private Set<Events> events;
+
+	/*
+	 * This will create sportsId Foreign key in the events table named as
+	 * FK_sportsId.
+	 */
+}
